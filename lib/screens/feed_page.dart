@@ -22,24 +22,52 @@ class FeedPage extends StatelessWidget {
       body: ListView.builder(
           itemCount: 15,
           itemBuilder: (BuildContext context, int index) {
-            return _postItem(index);
+            return _postItem(index, context);
           }),
     );
   }
 
-  Column _postItem(int index) {
+  Column _postItem(int index, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               _postHeader('username $index'),
               _postImage(index),
               _postActions(),
-              Padding(
-                padding: const EdgeInsets.only(left: common_gap),
-                child: Text('80 likes', style: TextStyle(fontWeight: FontWeight.bold)),
-              )
+              _postLikes(),
+              _postCaption(context, index)
             ],
           );
+  }
+
+  Padding _postCaption(BuildContext context, int index) {
+    return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: common_gap),
+              child: RichText(
+                text: TextSpan(
+                  style: DefaultTextStyle.of(context).style,
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'username $index',
+                      style: TextStyle(fontWeight: FontWeight.bold)
+                    ),
+                    TextSpan(
+                      text: ' '
+                    ),
+                    TextSpan(
+                      text: 'I am missing summer soooooooooooooo~~~~~~~~~~~much~~'
+                    ),
+                  ]
+                )
+              ),
+            );
+  }
+
+  Padding _postLikes() {
+    return Padding(
+              padding: const EdgeInsets.only(left: common_gap),
+              child: Text('80 likes', style: TextStyle(fontWeight: FontWeight.bold)),
+            );
   }
 
   Row _postActions() {
