@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/utils/profile_image_path.dart';
 
 class FeedPage extends StatelessWidget {
   @override
@@ -20,22 +21,44 @@ class FeedPage extends StatelessWidget {
       body: ListView.builder(
           itemCount: 15,
           itemBuilder: (BuildContext context, int index) {
-            return _feedItem(index);
+            return _postItem(index);
           }),
     );
   }
 
-  Column _feedItem(int index) {
+  Column _postItem(int index) {
     return Column(
             children: <Widget>[
-              _feedImage(index)
+              _postHeader('username $index'),
+              _postImage(index)
             ],
           );
   }
 
-  CachedNetworkImage _feedImage(int index) {
+  Row _postHeader(String username) {
+    return Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(14),
+                  child: CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(
+                        getProfileImgPath(username)
+                    ),
+                    radius: 16,
+                  ),
+                ),
+                Expanded(child: Text(username)),
+                IconButton(
+                  icon: Icon(Icons.more_horiz, color: Colors.black87),
+                  onPressed: null,
+                )
+              ],
+            );
+  }
+
+  CachedNetworkImage _postImage(int index) {
     return CachedNetworkImage(
-                  imageUrl: 'https://picsum.photos/id/$index/200/300',
+                  imageUrl: 'https://picsum.photos/id/$index/200/200',
                   imageBuilder: (BuildContext context, ImageProvider imageProvider) =>
                       AspectRatio(
                         aspectRatio: 1,
