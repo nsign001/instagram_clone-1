@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class FeedPage extends StatelessWidget {
@@ -19,10 +20,34 @@ class FeedPage extends StatelessWidget {
       body: ListView.builder(
           itemCount: 15,
           itemBuilder: (BuildContext context, int index) {
-            return Container(
-                height: 300,
-                color: Colors.primaries[index % Colors.primaries.length]);
+            return _feedItem(index);
           }),
     );
+  }
+
+  Column _feedItem(int index) {
+    return Column(
+            children: <Widget>[
+              _feedImage(index)
+            ],
+          );
+  }
+
+  CachedNetworkImage _feedImage(int index) {
+    return CachedNetworkImage(
+                  imageUrl: 'https://picsum.photos/id/$index/200/300',
+                  imageBuilder: (BuildContext context, ImageProvider imageProvider) =>
+                      AspectRatio(
+                        aspectRatio: 1,
+                        child: Container(
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: imageProvider,
+                                  fit: BoxFit.cover
+                                )
+                            ),
+                        ),
+                      ),
+              );
   }
 }
