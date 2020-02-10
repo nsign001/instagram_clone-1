@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/constants/size.dart';
 import 'package:instagram_clone/utils/profile_image_path.dart';
 
 class FeedPage extends StatelessWidget {
@@ -28,11 +29,53 @@ class FeedPage extends StatelessWidget {
 
   Column _postItem(int index) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               _postHeader('username $index'),
-              _postImage(index)
+              _postImage(index),
+              _postActions(),
+              Padding(
+                padding: const EdgeInsets.only(left: common_gap),
+                child: Text('80 likes', style: TextStyle(fontWeight: FontWeight.bold)),
+              )
             ],
           );
+  }
+
+  Row _postActions() {
+    return Row(
+              children: <Widget>[
+                IconButton(
+                  icon: ImageIcon(
+                    AssetImage('assets/bookmark.png'),
+                    color: Colors.black87,
+                  ),
+                  onPressed: null,
+                ),
+                IconButton(
+                  icon: ImageIcon(
+                    AssetImage('assets/comment.png'),
+                    color: Colors.black87,
+                  ),
+                  onPressed: null,
+                ),
+                IconButton(
+                  icon: ImageIcon(
+                    AssetImage('assets/direct_message.png'),
+                    color: Colors.black87,
+                  ),
+                  onPressed: null,
+                ),
+                Spacer(),
+                IconButton(
+                  icon: ImageIcon(
+                    AssetImage('assets/heart_selected.png'),
+                    color: Colors.black87,
+                  ),
+                  onPressed: null,
+                ),
+              ],
+            );
   }
 
   Row _postHeader(String username) {
@@ -44,7 +87,7 @@ class FeedPage extends StatelessWidget {
                     backgroundImage: CachedNetworkImageProvider(
                         getProfileImgPath(username)
                     ),
-                    radius: 16,
+                    radius: profile_radius,
                   ),
                 ),
                 Expanded(child: Text(username)),
