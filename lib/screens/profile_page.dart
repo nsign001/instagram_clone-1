@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/constants/size.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -23,18 +24,13 @@ class _ProfilePageState extends State<ProfilePage> {
           _profile(),
         ],
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        setState(() {
-          _menuOpened = !_menuOpened;
-        });
-      }),
     );
   }
 
   Widget _sideMenu() {
     return AnimatedContainer(
       curve: Curves.easeInOut,
-      color: Colors.redAccent,
+      color: Colors.grey[200],
       duration: Duration(milliseconds: duration),
       transform: Matrix4.translationValues(
         _menuOpened ? _size.width - menuWidth : _size.width,
@@ -48,11 +44,38 @@ class _ProfilePageState extends State<ProfilePage> {
     return AnimatedContainer(
       curve: Curves.easeInOut,
       duration: Duration(milliseconds: duration),
-      color: Colors.greenAccent,
+      color: Colors.transparent,
       transform: Matrix4.translationValues(
         _menuOpened ? -menuWidth : 0,
         0,
         0,
+      ),
+      child: SafeArea(
+        child: Column(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Expanded(
+                    child: Padding(
+                  padding: const EdgeInsets.only(left: common_gap),
+                  child: Text('학열',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      )),
+                )),
+                IconButton(
+                  icon: Icon(Icons.menu),
+                  onPressed: () {
+                    setState(() {
+                      _menuOpened = !_menuOpened;
+                    });
+                  },
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
