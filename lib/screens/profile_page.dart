@@ -37,6 +37,18 @@ class _ProfilePageState extends State<ProfilePage> {
         0,
         0,
       ),
+      child: SafeArea(
+        child: SizedBox(
+          width: menuWidth,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              FlatButton(child: Text('hacyeal'), onPressed: null)
+            ],
+          ),
+        ),
+      )
     );
   }
 
@@ -53,30 +65,34 @@ class _ProfilePageState extends State<ProfilePage> {
       child: SafeArea(
         child: Column(
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                Expanded(
-                    child: Padding(
-                  padding: const EdgeInsets.only(left: common_gap),
-                  child: Text('학열',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      )),
-                )),
-                IconButton(
-                  icon: Icon(Icons.menu),
-                  onPressed: () {
-                    setState(() {
-                      _menuOpened = !_menuOpened;
-                    });
-                  },
-                )
-              ],
-            )
+            _usernameIconButton()
           ],
         ),
       ),
     );
+  }
+
+  Row _usernameIconButton() {
+    return Row(
+            children: <Widget>[
+              Expanded(
+                  child: Padding(
+                padding: const EdgeInsets.only(left: common_gap),
+                child: Text('학열',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    )),
+              )),
+              IconButton(
+                icon: Icon(Icons.menu),
+                onPressed: () {
+                  setState(() {
+                    _menuOpened = !_menuOpened;
+                  });
+                },
+              )
+            ],
+          );
   }
 }
