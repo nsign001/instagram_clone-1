@@ -65,7 +65,7 @@ class FeedPage extends StatelessWidget {
             horizontal: common_gap, vertical: common_xs_gap),
         child: Comment(
             username: 'username $index',
-            caption: 'I love usmmer soooooooooooooo much~~~~~~~~~~~!!!! '));
+            caption: 'I love summer soooooooooooooo much~~~~~~~~~~~!!!! '));
   }
 
   Padding _postLikes() {
