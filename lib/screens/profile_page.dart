@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants/size.dart';
+import 'package:instagram_clone/utils/profile_image_path.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -29,27 +30,26 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _sideMenu() {
     return AnimatedContainer(
-      curve: Curves.easeInOut,
-      color: Colors.grey[200],
-      duration: Duration(milliseconds: duration),
-      transform: Matrix4.translationValues(
-        _menuOpened ? _size.width - menuWidth : _size.width,
-        0,
-        0,
-      ),
-      child: SafeArea(
-        child: SizedBox(
-          width: menuWidth,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              FlatButton(child: Text('hacyeal'), onPressed: null)
-            ],
-          ),
+        curve: Curves.easeInOut,
+        color: Colors.grey[200],
+        duration: Duration(milliseconds: duration),
+        transform: Matrix4.translationValues(
+          _menuOpened ? _size.width - menuWidth : _size.width,
+          0,
+          0,
         ),
-      )
-    );
+        child: SafeArea(
+          child: SizedBox(
+            width: menuWidth,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                FlatButton(child: Text('hacyeal'), onPressed: null)
+              ],
+            ),
+          ),
+        ));
   }
 
   Widget _profile() {
@@ -67,50 +67,92 @@ class _ProfilePageState extends State<ProfilePage> {
           children: <Widget>[
             _usernameIconButton(),
             Expanded(
-                child: CustomScrollView(
-                  slivers: <Widget>[
-                    SliverList(
-                      delegate: SliverChildListDelegate(_coloredContainers()),
-                    )
-                  ],
-                ),
+              child: CustomScrollView(
+                slivers: <Widget>[
+                  SliverList(
+                    delegate: SliverChildListDelegate([
+                      _getProfileHeader,
+                    ]),
+                  )
+                ],
+              ),
             ),
           ],
         ),
       ),
     );
   }
-  List<Widget> _coloredContainers() {
-    return List<Widget>.generate(
-        20,
-            (i) => Container(
-            height: 150, color: Colors.primaries[i % Colors.primaries.length]
+
+  Row get _getProfileHeader => Row(children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(common_gap),
+          child: CircleAvatar(
+              radius: 40,
+              backgroundImage: NetworkImage(
+                getProfileImgPath(('hacyeal')),
+              )),
+        ),
+        Expanded(
+          child: Table(
+            children: [
+              TableRow(children: [
+                _getStatusValueWidget('123'),
+                _getStatusValueWidget('324'),
+                _getStatusValueWidget('4536'),
+              ]),
+              TableRow(children: [
+                _getStatusLabelWidget('Posts'),
+                _getStatusLabelWidget('Followers'),
+                _getStatusLabelWidget('Following'),
+              ])
+            ],
+          ),
         )
-    );
-  }
+      ]);
+
+  Widget _getStatusValueWidget(String value) => Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: common_s_gap),
+          child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(value,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.bold))),
+        ),
+      );
+
+  Widget _getStatusLabelWidget(String value) => Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: common_s_gap),
+          child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(value,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.w300))),
+        ),
+      );
 
   Row _usernameIconButton() {
     return Row(
-            children: <Widget>[
-              Expanded(
-                  child: Padding(
-                padding: const EdgeInsets.only(left: common_gap),
-                child: Text('학열',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    )),
+      children: <Widget>[
+        Expanded(
+            child: Padding(
+          padding: const EdgeInsets.only(left: common_gap),
+          child: Text('학열',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
               )),
-              IconButton(
-                icon: Icon(Icons.menu),
-                onPressed: () {
-                  setState(() {
-                    _menuOpened = !_menuOpened;
-                  });
-                },
-              )
-            ],
-          );
+        )),
+        IconButton(
+          icon: Icon(Icons.menu),
+          onPressed: () {
+            setState(() {
+              _menuOpened = !_menuOpened;
+            });
+          },
+        )
+      ],
+    );
   }
-
 }
