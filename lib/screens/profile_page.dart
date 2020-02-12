@@ -65,10 +65,27 @@ class _ProfilePageState extends State<ProfilePage> {
       child: SafeArea(
         child: Column(
           children: <Widget>[
-            _usernameIconButton()
+            _usernameIconButton(),
+            Expanded(
+                child: CustomScrollView(
+                  slivers: <Widget>[
+                    SliverList(
+                      delegate: SliverChildListDelegate(_coloredContainers()),
+                    )
+                  ],
+                ),
+            ),
           ],
         ),
       ),
+    );
+  }
+  List<Widget> _coloredContainers() {
+    return List<Widget>.generate(
+        20,
+            (i) => Container(
+            height: 150, color: Colors.primaries[i % Colors.primaries.length]
+        )
     );
   }
 
@@ -95,4 +112,5 @@ class _ProfilePageState extends State<ProfilePage> {
             ],
           );
   }
+
 }
