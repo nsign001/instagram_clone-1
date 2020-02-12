@@ -9,14 +9,13 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   bool _menuOpened = false;
-  Size _size;
   double menuWidth;
   int duration = 200;
 
   @override
   Widget build(BuildContext context) {
-    _size = MediaQuery.of(context).size;
-    menuWidth = _size.width / 1.5;
+
+    menuWidth = size.width / 1.5;
 
     return Scaffold(
       body: Stack(
@@ -34,7 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
         color: Colors.grey[200],
         duration: Duration(milliseconds: duration),
         transform: Matrix4.translationValues(
-          _menuOpened ? _size.width - menuWidth : _size.width,
+          _menuOpened ? size.width - menuWidth : size.width,
           0,
           0,
         ),
