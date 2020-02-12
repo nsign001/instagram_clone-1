@@ -72,12 +72,47 @@ class _ProfilePageState extends State<ProfilePage> {
                   SliverList(
                     delegate: SliverChildListDelegate([
                       _getProfileHeader,
+                      _username(),
+                      _userBio(),
+                      _editProfileBtn()
                     ]),
                   )
                 ],
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Padding _username() {
+    return Padding(
+      padding: const EdgeInsets.only(left: common_gap),
+      child:
+          Text('User Real Name', style: TextStyle(fontWeight: FontWeight.bold)),
+    );
+  }
+
+  Padding _userBio() {
+    return Padding(
+      padding: const EdgeInsets.only(left: common_gap),
+      child: Text('Bio from Uwer. So Say something.',
+          style: TextStyle(fontWeight: FontWeight.w400)),
+    );
+  }
+
+  Padding _editProfileBtn() {
+    return Padding(
+      padding: const EdgeInsets.all(common_gap),
+      child: SizedBox(
+        height: 30,
+        child: OutlineButton(
+          onPressed: () {},
+          borderSide: BorderSide(color: Colors.black45),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+          child: Text('Edit Profile',
+              style: TextStyle(fontWeight: FontWeight.bold)),
         ),
       ),
     );
