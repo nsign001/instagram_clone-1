@@ -11,10 +11,11 @@ class _ProfilePageState extends State<ProfilePage> {
   bool _menuOpened = false;
   double menuWidth;
   int duration = 200;
+  AlignmentGeometry tabAlign = Alignment.centerLeft;
+  bool _tabIconGridselected = true;
 
   @override
   Widget build(BuildContext context) {
-
     menuWidth = size.width / 1.5;
 
     return Scaffold(
@@ -73,7 +74,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       _getProfileHeader,
                       _username(),
                       _userBio(),
-                      _editProfileBtn()
+                      _editProfileBtn(),
+                      _getTabIconButtons,
+                      _getAnimatedSeletedbar,
                     ]),
                   )
                 ],
@@ -188,5 +191,53 @@ class _ProfilePageState extends State<ProfilePage> {
         )
       ],
     );
+  }
+
+  Widget get _getTabIconButtons => Row(
+        children: <Widget>[
+          Expanded(
+            child: IconButton(
+              icon: ImageIcon(AssetImage('assets/grid.png'),
+                  color: _tabIconGridselected ? Colors.black87 : Colors.black26),
+              onPressed: () {
+                _setTab(true);
+              },
+            ),
+          ),
+          Expanded(
+            child: IconButton(
+              icon: ImageIcon(AssetImage('assets/saved.png'),
+                  color: _tabIconGridselected ? Colors.black26 : Colors.black87),
+              onPressed: () {
+                _setTab(false);
+              },
+            ),
+          ),
+        ],
+      );
+
+  Widget get _getAnimatedSeletedbar => AnimatedContainer(
+      alignment: tabAlign,
+      duration: Duration(milliseconds: 200),
+      curve: Curves.easeInOut,
+      color: Colors.transparent,
+      height: 1,
+      width: size.width,
+      child: Container(
+        height: 1,
+        width: size.width / 2,
+        color: Colors.black87,
+      ));
+
+  _setTab(bool tabLeft) {
+    setState(() {
+      if (tabLeft) {
+        this.tabAlign = Alignment.centerLeft;
+        this._tabIconGridselected = true;
+      } else {
+        this.tabAlign = Alignment.centerRight;
+        this._tabIconGridselected = false;
+      }
+    });
   }
 }
