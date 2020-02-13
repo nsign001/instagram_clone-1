@@ -13,6 +13,8 @@ class _ProfilePageState extends State<ProfilePage> {
   int duration = 200;
   AlignmentGeometry tabAlign = Alignment.centerLeft;
   bool _tabIconGridselected = true;
+  double _gridMargin = 0;
+  double _myImgGridMargin = size.width;
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +80,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       _getTabIconButtons,
                       _getAnimatedSeletedbar,
                     ]),
-                  )
+                  ),
+                  _getImageGrid(context),
                 ],
               ),
             ),
@@ -87,6 +90,28 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
+
+  SliverToBoxAdapter _getImageGrid(BuildContext context) => SliverToBoxAdapter(
+          child: Stack(
+        children: <Widget>[
+          AnimatedContainer(
+            duration: Duration(milliseconds: 200),
+            height: size.height * 2,
+            width: size.width,
+            transform: Matrix4.translationValues(_gridMargin, 0, 0),
+            curve: Curves.easeInOut,
+            color: Colors.purple,
+          ),
+          AnimatedContainer(
+            duration: Duration(milliseconds: 200),
+            height: size.height * 2,
+            width: size.width,
+            transform: Matrix4.translationValues(_myImgGridMargin, 0, 0),
+            curve: Curves.easeInOut,
+            color: Colors.yellow,
+          ),
+        ],
+      ));
 
   Padding _username() {
     return Padding(
@@ -198,7 +223,8 @@ class _ProfilePageState extends State<ProfilePage> {
           Expanded(
             child: IconButton(
               icon: ImageIcon(AssetImage('assets/grid.png'),
-                  color: _tabIconGridselected ? Colors.black87 : Colors.black26),
+                  color:
+                      _tabIconGridselected ? Colors.black87 : Colors.black26),
               onPressed: () {
                 _setTab(true);
               },
@@ -207,7 +233,8 @@ class _ProfilePageState extends State<ProfilePage> {
           Expanded(
             child: IconButton(
               icon: ImageIcon(AssetImage('assets/saved.png'),
-                  color: _tabIconGridselected ? Colors.black26 : Colors.black87),
+                  color:
+                      _tabIconGridselected ? Colors.black26 : Colors.black87),
               onPressed: () {
                 _setTab(false);
               },
@@ -234,9 +261,13 @@ class _ProfilePageState extends State<ProfilePage> {
       if (tabLeft) {
         this.tabAlign = Alignment.centerLeft;
         this._tabIconGridselected = true;
+        this._gridMargin = 0;
+        this._myImgGridMargin = size.width;
       } else {
         this.tabAlign = Alignment.centerRight;
         this._tabIconGridselected = false;
+        this._gridMargin = -size.width;
+        this._myImgGridMargin = 0;
       }
     });
   }
