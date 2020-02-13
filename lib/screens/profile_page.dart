@@ -40,8 +40,8 @@ class _ProfilePageState extends State<ProfilePage>
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          _sideMenu(),
           _profile(),
+          _sideMenu(),
         ],
       ),
     );
@@ -125,7 +125,7 @@ class _ProfilePageState extends State<ProfilePage>
     shrinkWrap: true,
     crossAxisCount: 3,
     childAspectRatio: 1,
-    children: List.generate(30, (index) => _gridImgItem(index)
+    children: List.generate(29, (index) => _gridImgItem(index)
     ),
   );
 
