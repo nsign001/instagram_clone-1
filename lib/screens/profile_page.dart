@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants/size.dart';
 import 'package:instagram_clone/utils/profile_image_path.dart';
+import 'package:instagram_clone/widgets/profile_side_menu.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -59,13 +60,7 @@ class _ProfilePageState extends State<ProfilePage>
         child: SafeArea(
           child: SizedBox(
             width: menuWidth,
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                FlatButton(child: Text('hacyeal'), onPressed: null)
-              ],
-            ),
+            child: ProfileSideMenu(),
           ),
         ));
   }
