@@ -136,12 +136,29 @@ class FeedPage extends StatelessWidget {
       imageUrl: 'https://picsum.photos/id/$index/200/200',
       imageBuilder: (BuildContext context, ImageProvider imageProvider) =>
           AspectRatio(
-        aspectRatio: 1,
-        child: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(image: imageProvider, fit: BoxFit.cover)),
-        ),
-      ),
+            aspectRatio: 1,
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.cover
+                )
+              ),
+            ),
+          ),
+      placeholder: (context, url) {
+        return Container(
+            width: size.width,
+            height: size.width,
+            child: Center(
+                child: SizedBox(
+                  width: 60,
+                  height: 60,
+                  child: Image.asset('assets/loading_img.gif'),
+                )
+            )
+        );
+      },
     );
   }
 }
