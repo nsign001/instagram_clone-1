@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants/size.dart';
 import 'package:instagram_clone/utils/profile_image_path.dart';
@@ -95,23 +96,33 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Stack(
         children: <Widget>[
           AnimatedContainer(
-            duration: Duration(milliseconds: 200),
-            height: size.height * 2,
-            width: size.width,
+            duration: Duration(milliseconds: duration),
             transform: Matrix4.translationValues(_gridMargin, 0, 0),
             curve: Curves.easeInOut,
-            color: Colors.purple,
+            child: _imageGrid,
           ),
           AnimatedContainer(
-            duration: Duration(milliseconds: 200),
-            height: size.height * 2,
-            width: size.width,
+            duration: Duration(milliseconds: duration),
             transform: Matrix4.translationValues(_myImgGridMargin, 0, 0),
             curve: Curves.easeInOut,
-            color: Colors.yellow,
+            child: _imageGrid,
           ),
         ],
       ));
+
+  GridView get _imageGrid => GridView.count(
+    physics: NeverScrollableScrollPhysics(),
+    shrinkWrap: true,
+    crossAxisCount: 3,
+    childAspectRatio: 1,
+    children: List.generate(30, (index) => _gridImgItem(index)
+    ),
+  );
+
+  CachedNetworkImage _gridImgItem(int index) => CachedNetworkImage(
+    fit: BoxFit.cover,
+    imageUrl: "https://picsum.photos/id/$index/100/100",
+  );
 
   Padding _username() {
     return Padding(
@@ -245,7 +256,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget get _getAnimatedSeletedbar => AnimatedContainer(
       alignment: tabAlign,
-      duration: Duration(milliseconds: 200),
+      duration: Duration(milliseconds: duration),
       curve: Curves.easeInOut,
       color: Colors.transparent,
       height: 1,
