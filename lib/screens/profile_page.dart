@@ -8,7 +8,9 @@ class ProfilePage extends StatefulWidget {
   _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePageState extends State<ProfilePage>
+    with SingleTickerProviderStateMixin {
+  AnimationController _animationController;
   bool _menuOpened = false;
   double menuWidth;
   int duration = 200;
@@ -16,6 +18,19 @@ class _ProfilePageState extends State<ProfilePage> {
   bool _tabIconGridselected = true;
   double _gridMargin = 0;
   double _myImgGridMargin = size.width;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+        vsync: this, duration: Duration(milliseconds: duration));
+  }
+
+  @override
+  void dispose(){
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -218,8 +233,13 @@ class _ProfilePageState extends State<ProfilePage> {
               )),
         )),
         IconButton(
-          icon: Icon(Icons.menu),
+          icon: AnimatedIcon(
+            icon: AnimatedIcons.menu_close,
+            progress: _animationController,
+            semanticLabel: 'Show menu',
+          ),
           onPressed: () {
+            _menuOpened ? _animationController.reverse() : _animationController.forward();
             setState(() {
               _menuOpened = !_menuOpened;
             });
