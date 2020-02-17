@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/widgets/sign_in_form.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -9,9 +10,11 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Stack(
           children: <Widget>[
+            SignInForm(),
             _goToSignUpPageBtn(context),
           ],
         )
