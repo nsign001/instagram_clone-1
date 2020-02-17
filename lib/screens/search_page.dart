@@ -17,7 +17,6 @@ class SearchPage extends StatelessWidget {
         separatorBuilder: (context, index){
           return Divider(thickness: 1, color: Colors.grey[300]);
         },
-
       )
     );
   }
