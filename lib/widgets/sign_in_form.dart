@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants/size.dart';
+import 'package:instagram_clone/utils/simple_snack_bar.dart';
 
 class SignInForm extends StatefulWidget {
   @override
@@ -25,7 +26,7 @@ class _SignInFormState extends State<SignInForm> {
       body: Padding(
         padding: const EdgeInsets.all(common_gap),
         child: Form(
-          key: _formKey,
+        key: _formKey,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -136,11 +137,6 @@ class _SignInFormState extends State<SignInForm> {
         ),
       )
     );
-  }
-
-  void simpleSnackbar(BuildContext context, String txt){
-    final snackBar = SnackBar(content: Text(txt),);
-    Scaffold.of(context).showSnackBar(snackBar);
   }
 
   InputDecoration getTextFieldDecor(String hint){

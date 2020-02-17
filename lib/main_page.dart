@@ -4,6 +4,7 @@ import 'package:instagram_clone/screens/camera_page.dart';
 import 'package:instagram_clone/screens/feed_page.dart';
 import 'package:instagram_clone/screens/profile_page.dart';
 import 'package:instagram_clone/screens/search_page.dart';
+import 'package:instagram_clone/widgets/my_progress_indicator.dart';
 
 class MainPage extends StatefulWidget{
   @override
@@ -18,7 +19,7 @@ class _MainPageState extends State<MainPage> {
     FeedPage(),
     SearchPage(),
     Container(color: Colors.primaries[2],),
-    Container(color: Colors.primaries[3],),
+    MyProgressIndicator(progressSize: 100),
     ProfilePage(),
   ];
 

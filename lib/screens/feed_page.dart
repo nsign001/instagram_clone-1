@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants/size.dart';
 import 'package:instagram_clone/utils/profile_image_path.dart';
 import 'package:instagram_clone/widgets/comment.dart';
+import 'package:instagram_clone/widgets/my_progress_indicator.dart';
 
 class FeedPage extends StatelessWidget {
   @override
@@ -147,18 +148,10 @@ class FeedPage extends StatelessWidget {
             ),
           ),
       placeholder: (context, url) {
-        return Container(
-            width: size.width,
-            height: size.width,
-            child: Center(
-                child: SizedBox(
-                  width: 60,
-                  height: 60,
-                  child: Image.asset('assets/loading_img.gif'),
-                )
-            )
-        );
+        return MyProgressIndicator(containerSize: size.width,);
       },
     );
   }
 }
+
+
