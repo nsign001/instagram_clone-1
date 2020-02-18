@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants/size.dart';
-import 'package:instagram_clone/screens/signin_page.dart';
+import 'package:instagram_clone/screens/auth_page.dart';
 
 class ProfileSideMenu extends StatelessWidget {
   @override
@@ -24,7 +24,7 @@ class ProfileSideMenu extends StatelessWidget {
             ),
             FlatButton.icon(
               onPressed: () {
-                final route = MaterialPageRoute(builder: (context) => SignInPage());
+                final route = MaterialPageRoute(builder: (context) => AuthPage());
                 Navigator.pushReplacement(context, route);
               },
               icon: Icon(Icons.exit_to_app, color: Colors.black87),

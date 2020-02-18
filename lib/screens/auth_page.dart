@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/screens/signin_page.dart';
 import 'package:instagram_clone/widgets/sign_in_form.dart';
 import 'package:instagram_clone/widgets/sign_up_form.dart';
 
-class SignUpPage extends StatefulWidget {
+class AuthPage extends StatefulWidget {
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  _AuthPageState createState() => _AuthPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _AuthPageState extends State<AuthPage> {
+
+  Widget currentWidget = SignInForm();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +18,13 @@ class _SignUpPageState extends State<SignUpPage> {
       body: SafeArea(
           child: Stack(
             children: <Widget>[
-              SignUpForm(),
+              AnimatedSwitcher(
+                  transitionBuilder: (Widget child, Animation<double> animation) {
+                    return FadeTransition(child: child, opacity: animation);
+                  },
+                  duration: Duration(milliseconds: 300),
+                  child: currentWidget
+              ),
               _goToSignUpPageBtn(context),
             ],
           )
@@ -33,20 +41,25 @@ class _SignUpPageState extends State<SignUpPage> {
       child: FlatButton(
         shape: Border(top: BorderSide(color: Colors.grey[300])),
         onPressed: (){
-          final route = MaterialPageRoute(builder: (context) => SignInPage());
-          Navigator.pushReplacement(context, route);
+          setState(() {
+            if(currentWidget is SignInForm){
+              currentWidget = SignUpForm();
+            }else{
+              currentWidget = SignInForm();
+            }
+          });
         },
         child: RichText(
           textAlign: TextAlign.center,
           text: TextSpan(
               children: <TextSpan>[
                 TextSpan(
-                    text: "이미 계정이 있으신가요?",
+                    text: (currentWidget is SignInForm) ? "계정이 없으신가요?" : "이미 계정이 있으신가요?",
                     style: TextStyle(
                         fontWeight: FontWeight.w300, color: Colors.black54)
                 ),
                 TextSpan(
-                    text: "    로그인",
+                    text: (currentWidget is SignInForm) ? "    회원가입" : "    로그인",
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.blue[600])
                 ),
