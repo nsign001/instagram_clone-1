@@ -22,7 +22,7 @@ class _AuthPageState extends State<AuthPage> {
                   transitionBuilder: (Widget child, Animation<double> animation) {
                     return FadeTransition(child: child, opacity: animation);
                   },
-                  duration: Duration(milliseconds: 300),
+                  duration: Duration(milliseconds: 500),
                   child: currentWidget
               ),
               _goToSignUpPageBtn(context),

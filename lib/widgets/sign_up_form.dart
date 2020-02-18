@@ -30,17 +30,17 @@ class _SignUpFormState extends State<SignUpForm> {
         padding: const EdgeInsets.all(common_gap),
         child: Form(
         key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
+          child: ListView(
+            /*mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.stretch,*/
             children: <Widget>[
-              Spacer(
-                flex: 6,
+              SizedBox(
+                height: 100,
               ),
               Image.asset('assets/insta_text_logo.png'),
-              Spacer(
-                flex: 1,
+              SizedBox(
+                height: common_xs_gap,
               ),
               TextFormField(
                 controller: _emailController,
@@ -52,8 +52,8 @@ class _SignUpFormState extends State<SignUpForm> {
                   return null;
                 },
               ),
-              Spacer(
-                flex: 1,
+              SizedBox(
+                height: common_xs_gap,
               ),
               TextFormField(
                 controller: _pwController,
@@ -65,8 +65,8 @@ class _SignUpFormState extends State<SignUpForm> {
                   return null;
                 },
               ),
-              Spacer(
-                flex: 1,
+              SizedBox(
+                height: common_xs_gap,
               ),
               TextFormField(
                 controller: _cpwController,
@@ -78,8 +78,8 @@ class _SignUpFormState extends State<SignUpForm> {
                   return null;
                 },
               ),
-              Spacer(
-                flex: 1,
+              SizedBox(
+                height: common_s_gap,
               ),
               FlatButton(
                 child: Text(
@@ -98,8 +98,8 @@ class _SignUpFormState extends State<SignUpForm> {
                   }
                 },
               ),
-              Spacer(
-                flex: 2,
+              SizedBox(
+                height: common_s_gap,
               ),
               Stack(
                 alignment: Alignment.center,
@@ -125,8 +125,8 @@ class _SignUpFormState extends State<SignUpForm> {
                   )
                 ],
               ),
-              Spacer(
-                flex: 2,
+              SizedBox(
+                height: common_s_gap,
               ),
               FlatButton.icon(
                 textColor: Colors.blue,
@@ -136,8 +136,11 @@ class _SignUpFormState extends State<SignUpForm> {
                 icon: ImageIcon(AssetImage('assets/icon/facebook.png')),
                 label: Text("페이스북으로 로그인"),
               ),
-              Spacer(
-                flex: 6,
+              SizedBox(
+                height: common_s_gap,
+              ),
+              SizedBox(
+                height: common_l_gap,
               ),
             ],
           ),
