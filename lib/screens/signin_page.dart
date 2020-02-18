@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/screens/signup_page.dart';
 import 'package:instagram_clone/widgets/sign_in_form.dart';
 
 class SignInPage extends StatefulWidget {
@@ -30,7 +31,10 @@ class _SignInPageState extends State<SignInPage> {
       height: 40,
       child: FlatButton(
         shape: Border(top: BorderSide(color: Colors.grey[300])),
-        onPressed: null,
+        onPressed: (){
+          final route = MaterialPageRoute(builder: (context) => SignUpPage());
+          Navigator.pushReplacement(context, route);
+        },
         child: RichText(
           textAlign: TextAlign.center,
           text: TextSpan(
