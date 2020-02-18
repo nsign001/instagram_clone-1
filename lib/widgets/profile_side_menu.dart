@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants/size.dart';
+import 'package:instagram_clone/screens/signin_page.dart';
 
 class ProfileSideMenu extends StatelessWidget {
   @override
@@ -22,7 +23,10 @@ class ProfileSideMenu extends StatelessWidget {
               height: 1,
             ),
             FlatButton.icon(
-              onPressed: null,
+              onPressed: () {
+                final route = MaterialPageRoute(builder: (context) => SignInPage());
+                Navigator.pushReplacement(context, route);
+              },
               icon: Icon(Icons.exit_to_app, color: Colors.black87),
               label: Text(
                 '로그아웃',

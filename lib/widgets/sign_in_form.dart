@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants/size.dart';
+import 'package:instagram_clone/main_page.dart';
 import 'package:instagram_clone/utils/simple_snack_bar.dart';
 
 class SignInForm extends StatefulWidget {
@@ -56,7 +57,7 @@ class _SignInFormState extends State<SignInForm> {
                 controller: _pwController,
                 decoration: getTextFieldDecor('비밀번호'),
                 validator: (String value){
-                  if(value.isEmpty || !value.contains("@")){
+                  if(value.isEmpty){
                     return '비밀번호를 입력해 주세요.';
                   }
                   return null;
@@ -87,7 +88,8 @@ class _SignInFormState extends State<SignInForm> {
                 disabledColor: Colors.blue[100],
                 onPressed: (){
                   if(_formKey.currentState.validate()){
-
+                    final route = MaterialPageRoute(builder: (context) => MainPage());
+                    Navigator.pushReplacement(context, route);
                   }
                 },
               ),
