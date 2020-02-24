@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants/size.dart';
 import 'package:instagram_clone/main_page.dart';
@@ -93,8 +94,9 @@ class _SignUpFormState extends State<SignUpForm> {
                 disabledColor: Colors.blue[100],
                 onPressed: (){
                   if(_formKey.currentState.validate()){
-                    final route = MaterialPageRoute(builder: (context) => MainPage());
-                    Navigator.pushReplacement(context, route);
+                    /*final route = MaterialPageRoute(builder: (context) => MainPage());
+                    Navigator.pushReplacement(context, route);*/
+                    _register;
                   }
                 },
               ),
@@ -170,5 +172,19 @@ class _SignUpFormState extends State<SignUpForm> {
       filled: true,
 
     );
+  }
+
+  get _register async {
+    final AuthResult result = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _pwController.text
+    );
+
+    final FirebaseUser user = result.user;
+
+    if(user==null){
+      final snackBar = SnackBar(content: Text('Please try again'));
+      Scaffold.of(context).showSnackBar(snackBar);
+    }
   }
 }
