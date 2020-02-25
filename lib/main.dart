@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants/material_white_color.dart';
 import 'package:instagram_clone/main_page.dart';
 import 'package:instagram_clone/screens/auth_page.dart';
+import 'package:instagram_clone/widgets/my_progress_indicator.dart';
 
 void main(){
   return runApp(MyApp());
 }
+
+bool isItFirstData = true;
 
 class MyApp extends StatelessWidget{
   @override
@@ -15,10 +18,15 @@ class MyApp extends StatelessWidget{
       home: StreamBuilder<FirebaseUser>(
         stream: FirebaseAuth.instance.onAuthStateChanged,
         builder: (context, snapshot) {
-          if(snapshot.hasData) {
-            return MainPage();
+          if (isItFirstData) {
+            isItFirstData = false;
+            return MyProgressIndicator();
+          } else {
+            if (snapshot.hasData) {
+              return MainPage();
+            }
+            return AuthPage();
           }
-          return AuthPage();
         }
       ),
       theme: ThemeData(
