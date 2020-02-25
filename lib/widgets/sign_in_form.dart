@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants/size.dart';
 import 'package:instagram_clone/main_page.dart';
@@ -55,6 +56,7 @@ class _SignInFormState extends State<SignInForm> {
               ),
               TextFormField(
                 controller: _pwController,
+                obscureText: true,
                 decoration: getTextFieldDecor('비밀번호'),
                 validator: (String value){
                   if(value.isEmpty){
@@ -88,8 +90,9 @@ class _SignInFormState extends State<SignInForm> {
                 disabledColor: Colors.blue[100],
                 onPressed: (){
                   if(_formKey.currentState.validate()){
-                    final route = MaterialPageRoute(builder: (context) => MainPage());
-                    Navigator.pushReplacement(context, route);
+                    /*final route = MaterialPageRoute(builder: (context) => MainPage());
+                    Navigator.pushReplacement(context, route);*/
+                    _login;
                   }
                 },
               ),
@@ -142,6 +145,19 @@ class _SignInFormState extends State<SignInForm> {
         ),
       )
     );
+  }
+
+  get _login async{
+    final AuthResult result = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _pwController.text
+    );
+
+    final FirebaseUser user = result.user;
+
+    if(user == null){
+      simpleSnackbar(context, 'Please try again later!');
+    }
   }
 
   InputDecoration getTextFieldDecor(String hint){

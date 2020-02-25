@@ -58,6 +58,7 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
               TextFormField(
                 controller: _pwController,
+                obscureText: true,
                 decoration: getTextFieldDecor('비밀번호'),
                 validator: (String value){
                   if(value.isEmpty){
@@ -71,6 +72,7 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
               TextFormField(
                 controller: _cpwController,
+                obscureText: true,
                 decoration: getTextFieldDecor('비밀번호 확인'),
                 validator: (String value){
                   if(value.isEmpty || value != _pwController.text){
@@ -183,8 +185,7 @@ class _SignUpFormState extends State<SignUpForm> {
     final FirebaseUser user = result.user;
 
     if(user==null){
-      final snackBar = SnackBar(content: Text('Please try again'));
-      Scaffold.of(context).showSnackBar(snackBar);
+      simpleSnackbar(context, 'Please try again later!');
     }
   }
 }
