@@ -30,7 +30,7 @@ class _SignUpFormState extends State<SignUpForm> {
       body: Padding(
         padding: const EdgeInsets.all(common_gap),
         child: Form(
-        key: _formKey,
+          key: _formKey,
           child: ListView(
             /*mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,

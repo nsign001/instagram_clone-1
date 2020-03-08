@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants/size.dart';
+import 'package:instagram_clone/firebase/firestore_provider.dart';
 import 'package:instagram_clone/utils/profile_image_path.dart';
 import 'package:instagram_clone/widgets/comment.dart';
 import 'package:instagram_clone/widgets/my_progress_indicator.dart';
@@ -20,11 +21,17 @@ class FeedPage extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(
-              onPressed: null,
+              onPressed: (){
+                firestoreProvider.sendData().then((_){
+                  print('data sent to firestore!');
+                });
+              },
               icon: ImageIcon(AssetImage('assets/actionbar_camera.png'),
                   color: Colors.black)),
           IconButton(
-              onPressed: null,
+              onPressed: (){
+                firestoreProvider.getData();
+              },
               icon: ImageIcon(AssetImage('assets/direct_message.png'),
                   color: Colors.black))
         ],
