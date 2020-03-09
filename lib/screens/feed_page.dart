@@ -21,17 +21,11 @@ class FeedPage extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(
-              onPressed: (){
-                firestoreProvider.sendData().then((_){
-                  print('data sent to firestore!');
-                });
-              },
+              onPressed: null,
               icon: ImageIcon(AssetImage('assets/actionbar_camera.png'),
                   color: Colors.black)),
           IconButton(
-              onPressed: (){
-                firestoreProvider.getData();
-              },
+              onPressed: null,
               icon: ImageIcon(AssetImage('assets/direct_message.png'),
                   color: Colors.black))
         ],
