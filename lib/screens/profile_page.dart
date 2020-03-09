@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants/size.dart';
+import 'package:instagram_clone/data/provider/my_user_data.dart';
 import 'package:instagram_clone/utils/profile_image_path.dart';
 import 'package:instagram_clone/widgets/profile_side_menu.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -137,8 +139,14 @@ class _ProfilePageState extends State<ProfilePage>
   Padding _username() {
     return Padding(
       padding: const EdgeInsets.only(left: common_gap),
-      child:
-          Text('User Real Name', style: TextStyle(fontWeight: FontWeight.bold)),
+      child: Consumer<MyUserData>(
+          builder: (context, myUserData, child){
+            return Text(
+                myUserData.data.username,
+                style: TextStyle(fontWeight: FontWeight.bold)
+            );
+          },
+      ),
     );
   }
 

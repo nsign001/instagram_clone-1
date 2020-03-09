@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants/size.dart';
+import 'package:instagram_clone/data/provider/my_user_data.dart';
 import 'package:instagram_clone/screens/auth_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 class ProfileSideMenu extends StatelessWidget {
   @override
@@ -27,6 +29,7 @@ class ProfileSideMenu extends StatelessWidget {
               onPressed: () {
                 /*final route = MaterialPageRoute(builder: (context) => AuthPage());
                 Navigator.pushReplacement(context, route);*/
+                Provider.of<MyUserData>(context, listen: false).clearUser();
                 FirebaseAuth.instance.signOut();
               },
               icon: Icon(Icons.exit_to_app, color: Colors.black87),

@@ -7,18 +7,16 @@ class FirestoreProvider with Transformer{
 
   final Firestore _firestore = Firestore.instance;
 
-  Future<void> attemptCreateUser({String userKey, String email}) {
+  Future<void> attemptCreateUser({String userKey, String email}) async {
     final DocumentReference userRef = _firestore.collection(COLLECTION_USERS).document(userKey);
+    final DocumentSnapshot snapshot = await userRef.get();
 
     return _firestore.runTransaction((Transaction tx) async {
-      DocumentSnapshot snapshot = await tx.get(userRef);
-      if (snapshot.exists) {
-        return;
-      } else {
+      if (!snapshot.exists) {
         await tx.set(userRef, User.getMapForCreateUser(email));
       }
     });
-  }
+}
 
   Stream<User> connectMyUserData(String userKey){
     return _firestore

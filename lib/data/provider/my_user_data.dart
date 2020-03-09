@@ -10,4 +10,9 @@ class MyUserData extends ChangeNotifier{
     _myUserData = user;
     notifyListeners();
   }
+
+  void clearUser(){
+    _myUserData = null;
+    notifyListeners();
+  }
 }
