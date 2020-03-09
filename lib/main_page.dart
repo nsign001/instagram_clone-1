@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constants/size.dart';
 import 'package:instagram_clone/screens/camera_page.dart';
@@ -73,11 +74,16 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
-  openCamera(BuildContext context){
+  openCamera(BuildContext context) async{
+    final cameras = await availableCameras();
+    final firstCamera = cameras.first;
+
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => CameraPage(),
+        builder: (context) => CameraPage(
+          camera: firstCamera,
+        )
       )
     );
   }
