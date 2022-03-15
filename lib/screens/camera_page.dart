@@ -4,7 +4,6 @@ import 'package:instagram_clone/constants/size.dart';
 import 'package:instagram_clone/widgets/my_progress_indicator.dart';
 
 class CameraPage extends StatefulWidget {
-
   final CameraDescription camera;
 
   const CameraPage({Key key, @required this.camera}) : super(key: key);
@@ -42,7 +41,7 @@ class _CameraPageState extends State<CameraPage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.close),
-            onPressed: (){
+            onPressed: () {
               Navigator.pop(context);
             },
           )
@@ -71,15 +70,15 @@ class _CameraPageState extends State<CameraPage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage('assets/grid.png')),
-            title: Text('Gallery'),
+            label: 'Gallery',
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage('assets/grid.png')),
-            title: Text('Photo'),
+            label: 'Photo',
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage('assets/grid.png')),
-            title: Text('Video'),
+            label: 'Video',
           ),
         ],
         currentIndex: _selectedIndex,
@@ -88,48 +87,45 @@ class _CameraPageState extends State<CameraPage> {
     );
   }
 
-  void _onItemTapped(BuildContext context, int index){
+  void _onItemTapped(BuildContext context, int index) {
     _pageController.animateToPage(index,
         duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
   }
 
-  Widget _galleryPage(){
+  Widget _galleryPage() {
     return Container(color: Colors.green);
   }
-  Widget _takePhotoPage(){
+
+  Widget _takePhotoPage() {
     return FutureBuilder<void>(
-      future: _initializeControllerFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done){
-          return Column(
-            children: <Widget>[
-              Container(
-                  width: size.width,
-                  height: size.width,
-                  child: ClipRect(
-                      child: OverflowBox(
-                          alignment: Alignment.topCenter,
-                          child: FittedBox(
-                              fit: BoxFit.fitWidth,
-                              child: Container(
-                                width: size.width,
-                                height: size.width /
-                                    _controller.value.aspectRatio,
-                                child: CameraPreview(_controller),
-                              )
-                          )
-                      )
-                  )
-              )
-            ],
-          );
-        }else{
-          return MyProgressIndicator();
-        }
-      }
-    );
+        future: _initializeControllerFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Column(
+              children: <Widget>[
+                Container(
+                    width: size.width,
+                    height: size.width,
+                    child: ClipRect(
+                        child: OverflowBox(
+                            alignment: Alignment.topCenter,
+                            child: FittedBox(
+                                fit: BoxFit.fitWidth,
+                                child: Container(
+                                  width: size.width,
+                                  height: size.width /
+                                      _controller.value.aspectRatio,
+                                  child: CameraPreview(_controller),
+                                )))))
+              ],
+            );
+          } else {
+            return MyProgressIndicator();
+          }
+        });
   }
-  Widget _takeVideoPage(){
+
+  Widget _takeVideoPage() {
     return Container(color: Colors.deepOrange);
   }
 }
